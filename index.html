@@ -4,106 +4,19 @@
 <head>
   <link rel="stylesheet" href="style.css" />
   <script src="node_modules/FontLoader/FontLoader.js"></script>
-  <script src="js/src/util.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-      function draw_stamp(ctx, font_height_px, text) {
-        var text_width, rectangle_padding_px = 10,
-          rectangle_line_width = 4;
-
-        var temp_canvas, temp_ctx;
-        temp_canvas = document.createElement('canvas');
-        temp_canvas.width = '9999';
-        temp_canvas.height = '9999';
-        temp_ctx = temp_canvas.getContext('2d');
-
-        temp_ctx.textAlign = 'top left';
-        temp_ctx.font = 'normal normal ' + font_height_px + 'px' + ' ' + 'Masterplan';
-        text_width = temp_ctx.measureText(text);
-
-        temp_canvas.width = text_width.width + (rectangle_padding_px * 2) + (rectangle_line_width * 2);
-        temp_canvas.height = font_height_px + (rectangle_padding_px * 2) + (rectangle_line_width * 2);
-        temp_ctx.font = 'normal normal ' + font_height_px + 'px' + ' ' + 'Masterplan';
-        temp_ctx.fillStyle = '#ca2541';
-
-        temp_ctx.textBaseline = "middle";
-        temp_ctx.fillText(
-          text,
-          Math.round((rectangle_padding_px * 2) - (rectangle_line_width)) - 1,
-          Math.round(font_height_px / 2 + rectangle_padding_px + rectangle_line_width)
-        );
-
-        // Draw the rectangular border
-        temp_ctx.lineWidth = rectangle_line_width;
-
-        StamperUtil.load_image('lamp6.png', function(loader) {
-          temp_ctx.strokeStyle = temp_ctx.createPattern(loader, 'repeat');
-
-          temp_ctx.strokeRect(
-            Math.floor(rectangle_padding_px / 2),
-            Math.floor(rectangle_padding_px / 2),
-            temp_canvas.width - rectangle_padding_px,
-            temp_canvas.height - rectangle_padding_px
-          );
-
-          ctx.save();
-
-          ctx.translate(
-            canvas_dimensions.width / 2,
-            canvas_dimensions.height / 2
-          )
-          ctx.rotate(270);
-
-          ctx.drawImage(temp_canvas, temp_canvas.width/-2, temp_canvas.height/-2);
-          ctx.restore();
-
-        });
-
-        return text_width;
-      }
-
-      var canvas = document.getElementById('preview'),
-        ctx = canvas.getContext('2d'),
-        canvas_dimensions = {
-          width: canvas.width,
-          height: canvas.height
-        },
-        font_height_px = 72;
-
-      window.addEventListener('resize', function() {
-        canvas_dimensions = {
-          width: canvas.scrollWidth,
-          height: canvas.scrollHeight
-        };
-      });
-
-      var fontLoader = new FontLoader(['Masterplan'], {
-        'complete': function(error) {
-
-          // Clear the canvas
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, canvas_dimensions.width, canvas_dimensions.height);
-
-          StamperUtil.load_image('glasses.jpg', function(loader) {
-            ctx.drawImage(loader, 0, 0);
-            draw_stamp(ctx, font_height_px, 'preprod');
-          });
-        }
-      }, 3000);
-
-      fontLoader.loadFonts();
-
-    });
-  </script>
 </head>
 
 <body>
-  <canvas id=preview width=320 height=200 style="width:80%;">
-    You need to update your browser to one that supports canvas
-  </canvas>
-  <!-- http://freestocktextures.com/texture/id/763 -->
-  <!-- <img src="lamp6.png" id="lamp" style="display:none;"/> -->
+  <h1>Image stamper</h1>
+  <h2>Create custom stamp graphics or stamp your text onto an image</h2>
+  <div style="text-align:center;margin: 10px auto;">
+    <canvas id=preview width=320 height=200 style="width:80%;">
+      You need to update your browser to one that supports <canvas>
+    </canvas>
+  </div>
+
+  <script src="js/src/util.js"></script>
+  <script src="js/src/stamper.js"></script>
 </body>
 
 </html>
