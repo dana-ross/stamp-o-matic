@@ -7,6 +7,8 @@
   var canvas = document.getElementById('preview');
   var ctx = canvas.getContext('2d');
   var angle = -10.14;
+  var background_image_contents = '';
+  var single_transparent_pixel = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
   function apply_stamp(ctx, font_height_px, text) {
 
@@ -70,19 +72,36 @@
     });
   }
 
+  function render_canvas(canvas, ctx, font_height_px, stamp_text) {
+    StamperUtil.clear_canvas(canvas);
+    var image = document.createElement('img');
+    image.src = background_image_contents ? background_image_contents : single_transparent_pixel;
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    apply_stamp(ctx, font_height_px, stamp_text);
+  }
+  
   var fontLoader = new FontLoader(['Masterplan'], {
     'complete': function(error) {
       canvas.addEventListener('draw', function() {
-        StamperUtil.clear_canvas(canvas);
-        StamperUtil.load_image('glasses.jpg', function(loader) {
-          // ctx.drawImage(loader, 0, 0, canvas.width, canvas.height);
-          apply_stamp(ctx, font_height_px, stamp_text);
-        });
+        render_canvas(canvas, ctx, font_height_px, document.getElementById('stamp_text').value)
       });
       canvas.dispatchEvent(new Event('draw'));
     }
   }, 3000);
   fontLoader.loadFonts();
+  
+  function readSingleFile(e) {
+      var file = e.target.files[0];
+      if (!file) {
+          return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          background_image_contents = e.target.result;
+          canvas.dispatchEvent(new Event('draw'));
+      };
+      reader.readAsDataURL(file);
+  }
 
   window.addEventListener('resize', function() {
     // Redraw the canvas on the next frame
@@ -90,5 +109,15 @@
       canvas.dispatchEvent(new Event('draw'));
     });
   });
+  
+  document.getElementById('stamp_text').addEventListener('keyup', function(e) {
+      canvas.dispatchEvent(new Event('draw'));
+  });
+  
+  document.getElementById('background_image').addEventListener('change', readSingleFile, false);
 
+  document.getElementById('download_button').addEventListener('click', function() {
+     download(canvas.toDataURL('image/png'), 'stamp.png', 'image/png'); 
+  });
+  
 }());

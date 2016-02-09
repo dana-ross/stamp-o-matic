@@ -3,6 +3,7 @@
     "grunt-ttf2woff": "^1.0.0"
   },
   "dependencies": {
-    "FontLoader": "git://github.com/smnh/FontLoader"
+    "FontLoader": "git://github.com/smnh/FontLoader",
+    "downloadjs": "rndme/download"
   }
 }
