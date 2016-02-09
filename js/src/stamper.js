@@ -73,11 +73,42 @@
   }
 
   function render_canvas(canvas, ctx, font_height_px, stamp_text) {
+    
+    function aspectRatioCorrection(fillScreen, image, canvas) {
+        var scalingFactor;
+
+        var screenWidth = canvas.width;
+        var screenHeight = canvas.height;
+        var screenAspectRatio = screenWidth / screenHeight;
+        var imageWidth = image.width;
+        var imageHeight = image.height;
+        var imageAspectRatio = imageWidth / imageHeight;
+
+        if (fillScreen) {
+            if (screenAspectRatio > imageAspectRatio) {
+                scalingFactor = screenWidth / imageWidth;
+            } else {
+                scalingFactor = screenHeight / imageHeight;
+            }
+        } else {
+            if (screenAspectRatio > imageAspectRatio) {
+                scalingFactor =  screenHeight / imageHeight;
+            } else {
+                scalingFactor = screenWidth / imageWidth;
+            }
+        }
+
+        return scalingFactor;
+    }
+    
     StamperUtil.clear_canvas(canvas);
-    var image = document.createElement('img');
+    var image = new Image;
+    image.onload = function(e) {
+        var scalingFactor = aspectRatioCorrection(true, image, canvas);
+        ctx.drawImage(image, 0, 0, image.width * scalingFactor, image.height * scalingFactor);
+        apply_stamp(ctx, font_height_px, stamp_text);
+    };
     image.src = background_image_contents ? background_image_contents : single_transparent_pixel;
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-    apply_stamp(ctx, font_height_px, stamp_text);
   }
   
   var fontLoader = new FontLoader(['Masterplan'], {
