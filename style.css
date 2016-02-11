@@ -6,6 +6,158 @@
        url('/fonts/billy-argel_masterplan/MASTERPLAN___.woff') format('woff');
 }
 
-div {
-  /*background-image: url('grid.jpg');*/
+* {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+body {
+    background-color: #EDDFF5;
+    font-size: 16px;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+fieldset legend {
+    display: block;
+}
+
+a[role=button], #stamp_sizes label, label[for=background_image] {
+    display: inline-block;
+    padding: .5rem 1rem;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    border-radius: .2rem;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+}
+
+input[type=file] {
+    display: none;
+}
+
+#stamp_sizes input:checked + label {
+    background-color: #88aa88;
+}
+
+body > * {
+    width: 90%;
+    margin: 0 auto;
+}
+
+header, canvas, a[role=button], p {
+    margin-bottom: 1rem;
+}
+
+a[role=button] {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+canvas {
+    width: 100%;
+}
+
+header {
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-family: Masterplan;
+    color: red;
+    font-size: 6rem;
+    margin-bottom: 1rem;
+}
+
+h2, legend, label {
+    color: #000;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+h2 {
+    text-transform: uppercase;
+}
+
+header h2 {
+    font-size: 1rem;
+    padding: 0;
+}
+
+#coda > * {
+    margin: 0;
+    padding-left: 1rem;
+    vertical-align: top;
+    width: 29%;
+    display: inline-block;
+}
+
+#coda > *:first-child {
+    padding-left: 0;
+}
+
+#coda p {
+    font-size: 1.2rem;
+}
+
+#coda img {
+    margin-bottom: 1rem;
+}
+
+#coda img {
+    max-width: 100%;
+}
+
+#stamp_sizes input {
+    display: none;
+}
+
+label, legend {
+    color: #000;
+    margin-bottom: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;   
+    display: block;
+    padding: 0;
+}
+
+input[type=text] {
+    margin-bottom: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    width: 100%;
+    padding: .1rem;
+}
+
+#controls {
+    margin-top: 2rem;
+}
+
+#controls > div {
+    width: 49%;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#controls > div > * {
+    text-align: right;
+    margin-bottom: 1.2rem;
+}
+
+#controls > div:first-child > * {
+    text-align: left;
+    margin-bottom: 1rem;
 }

@@ -5,23 +5,66 @@
   <link rel="stylesheet" href="style.css" />
   <script src="node_modules/FontLoader/FontLoader.js"></script>
   <script async src="node_modules/downloadjs/download.min.js"></script>
+  <meta name="description" content="Create custom \"rubber stamp\" graphics or stamp your text onto an image. It's easy. It's fun.">
 </head>
 
 <body>
-  <h1>Image stamper</h1>
-  <h2>Create custom stamp graphics or stamp your text onto an image</h2>
-  <div style="text-align:center;margin: 10px auto;">
-    <canvas id=preview width=1024 height=768 style="width:80%;">
+  <header>
+    <h1>Stamp-o-Matic</h1>
+    <h2>Create custom &ldquo;rubber stamp&rdquo; graphics or stamp your text onto an image. It's easy. It's fun.<br />Impress your friends. Impress your boss. Impress that cute barista. <em>You know the one!</em></h2>
+  </header>
+
+  <div id="controls">
+      <div>
+        <label for="stamp_text">Stamp Text</label>
+        <input type="text" value="Your Text" name="stamp_text" id="stamp_text" maxlength="35" /><br />
+        <fieldset id="stamp_sizes">
+            <legend>Stamp Size</legend>
+            <input type="radio" name="stamp_size" id="stamp_size" value="1x" />
+            <label for="stamp_size">Mini</label>
+            <input type="radio" name="stamp_size" id="stamp_size_2x" value="2x"/>
+            <label for="stamp_size_2x">Small</label>
+            <input type="radio" name="stamp_size" id="stamp_size_3x" value="3x"/>
+            <label for="stamp_size_3x">Medium</label>
+            <input type="radio" name="stamp_size" id="stamp_size_4x" value="4x" checked="checked" />
+            <label for="stamp_size_4x">Big</label>
+        </fieldset>
+      </div>
+      <div>
+        <div>
+            <input type="file" name="background_image" id="background_image" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+            <label for="background_image">Add a picture</label>
+        </div>
+        <div><a role="button" id="download_button">Download as PNG</a></div>
+      </div>
+  </div>
+  
+  <div>
+    <canvas id=preview width=1024 height=768>
       You need to update your browser to one that supports <canvas>
     </canvas>
   </div>
-  <div>
-      <input type="text" value="Test" name="stamp_text" id="stamp_text" /><br />
-      <fieldset><label for="stamp_size">Stamp Size</label><input type="radio" name="stamp_size" id="stamp_size" value="1x" checked="checked" /><input type="radio" name="stamp_size" id="stamp_size_2x" value="2x"/><input type="radio" name="stamp_size" id="stamp_size_3x" value="3x"/><input type="radio" name="stamp_size" id="stamp_size_4x" value="4x"/></fieldset>
-      <input type="file" name="background_image" id="background_image" /><br />
-      <button id="download_button">Download</button>
-  </div>
 
+  <div id="coda">
+      <div>
+          <img src="Unofficial_JavaScript_logo_2.svg" />
+          <img src="http://bostonbuilt.org/icon.php?q=boston_built_usa_small.png&u="/>
+      </div>
+      <div>
+          <h2>Buy me a coffee</h2>
+          <a href="https://www.paypal.me/davidmichaelross" role="button">PayPal</a>
+          <a href="https://cash.me/$daveross/5" role="button">Credit/Debit</a>
+          <h2>Your Privacy Matters</h2>
+          <p>Stamp-o-Matic runs entirely in your browser. Your images and the text you stamp on them are never sent to my server or shared with third parties.</p>
+      </div>
+      <div>
+        <h2>Dave Ross</h2>
+        <p>I'm a Boston-area web developer with solid experience in &ldquo;back-end&rdquo; development, including content management systems, and a passion for design and user experience engineering.</p>
+        <a href="http://davidmichaelross.com" role="button">View My Portfolio</a>
+      </div>
+  </div>
+  
+  
   <script src="js/src/util.js"></script>
   <script src="js/src/stamper.js"></script>
 </body>
