@@ -111,10 +111,14 @@
     image.src = background_image_contents ? background_image_contents : single_transparent_pixel;
   }
   
+  function getStampScalingFactor() {
+    return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1    
+  }
+  
   var fontLoader = new FontLoader(['Masterplan'], {
     'complete': function(error) {
       canvas.addEventListener('draw', function() {
-        render_canvas(canvas, ctx, font_height_px, document.getElementById('stamp_text').value)
+          render_canvas(canvas, ctx, font_height_px * getStampScalingFactor(), document.getElementById('stamp_text').value)
       });
       canvas.dispatchEvent(new Event('draw'));
     }
@@ -144,6 +148,13 @@
   document.getElementById('stamp_text').addEventListener('keyup', function(e) {
       canvas.dispatchEvent(new Event('draw'));
   });
+  
+  var stamp_size_inputs = document.querySelectorAll('[name=stamp_size]');
+  for(var input = stamp_size_inputs[0], i = 0; i < stamp_size_inputs.length; i += 1, input = stamp_size_inputs[i]) {
+      input.addEventListener('change', function(e) {
+        canvas.dispatchEvent(new Event('draw')); 
+      });
+  };
   
   document.getElementById('background_image').addEventListener('change', readSingleFile, false);
 
