@@ -2,7 +2,14 @@
   font-family: Masterplan;
   font-style: normal;
   font-weight: 400;
-  src: url(fonts/billy-argel_masterplan/MASTERPLAN___.ttf) format("truetype"),url(fonts/billy-argel_masterplan/MASTERPLAN___.woff) format("woff");
+  src: url(fonts/billy-argel_masterplan/MASTERPLAN___.woff) format("woff"),url(fonts/billy-argel_masterplan/MASTERPLAN___.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Capture It";
+    font-style: normal;
+    font-weight: 400;
+    src: url(fonts/capture_it/capture\ it.ttf) format("truetype");
 }
 
 * {
@@ -70,7 +77,7 @@ header {
 }
 
 h1 {
-  font-family: Masterplan;
+  font-family: "Capture It";
   color: red;
   font-size: 6rem;
   margin-bottom: 1rem;
