@@ -1,4 +1,9 @@
 {
+  "name": "Stamp-o-Matic",
+  "description": "The Stamp-o-Matic web site",
+  "author": "Dave Ross <dave@davidmichaelross.com> (http://davidmichaelross.com)",
+  "private": true,
+  "license": "MIT",
   "devDependencies": {
     "grunt-ttf2woff": "^1.0.0"
   },
