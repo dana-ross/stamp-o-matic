@@ -27,7 +27,7 @@ fieldset legend {
     display: block;
 }
 
-a[role=button], #stamp_sizes label, label[for=background_image] {
+a.appearance_button, #stamp_sizes label, label[for=background_image] {
     display: inline-block;
     padding: .5rem 1rem;
     text-align: center;
@@ -52,11 +52,11 @@ body > * {
     margin: 0 auto;
 }
 
-header, canvas, a[role=button], p {
+header, canvas, a.appearance_button, p {
     margin-bottom: 1rem;
 }
 
-a[role=button] {
+a.appearance_button {
     text-transform: uppercase;
     font-weight: bold;
 }

@@ -4,8 +4,6 @@
 <head>
   <title>Stamp-o-Matic: Create custm &ldquo;rubber&rdquo; stamp graphics</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="node_modules/FontLoader/FontLoader.js"></script>
-  <script async src="node_modules/downloadjs/download.min.js"></script>
   <meta name="description" content="Create custom \"rubber stamp\" graphics or stamp your text onto an image. It's easy. It's fun.">
   <link rel="canonical" href="http://stamp-o-matic.com" />
 </head>
@@ -37,7 +35,7 @@
             <input type="file" name="background_image" id="background_image" class="inputfile" data-multiple-caption="{count} files selected" multiple />
             <label for="background_image">Add a picture</label>
         </div>
-        <div><a role="button" id="download_button">Download as PNG</a></div>
+        <div><a class="appearance_button" id="download_button">Download as PNG</a></div>
       </div>
   </div>
   
@@ -49,26 +47,28 @@
 
   <div id="coda">
       <div>
-          <img src="Unofficial_JavaScript_logo_2.svg" />
-          <img src="http://bostonbuilt.org/icon.php?q=boston_built_usa_small.png&u="/>
+          <img src="Unofficial_JavaScript_logo_2.svg" alt="Built in JavaScript" />
+          <img src="boston_built_usa_small.png" alt="Built in Boston, USA" />
       </div>
       <div>
           <h2>Buy me a coffee</h2>
-          <a href="https://www.paypal.me/davidmichaelross" role="button">PayPal</a>
-          <a href="https://cash.me/$daveross/5" role="button">Credit/Debit</a>
+          <a href="https://www.paypal.me/davidmichaelross" class="appearance_button">PayPal</a>
+          <a href="https://cash.me/$daveross/5" class="appearance_button">Credit/Debit</a>
           <h2>Your Privacy Matters</h2>
           <p>Stamp-o-Matic runs entirely in your browser. Your images and the text you stamp on them are never sent to my server or shared with third parties.</p>
       </div>
       <div>
         <h2>Dave Ross</h2>
         <p>I'm a Boston-area web developer with solid experience in &ldquo;back-end&rdquo; development, including content management systems, and a passion for design and user experience engineering.</p>
-        <a href="http://davidmichaelross.com" role="button">View My Portfolio</a>
+        <a href="http://davidmichaelross.com" class="appearance_button">View My Portfolio</a>
       </div>
   </div>
   
-  
+  <script src="node_modules/FontLoader/FontLoader.js"></script>
+  <script async src="node_modules/downloadjs/download.min.js"></script>
   <script src="js/src/util.js"></script>
   <script src="js/src/stamper.js"></script>
+ 
 </body>
 
 </html>
