@@ -1,163 +1,159 @@
 @font-face {
-  font-family: 'Masterplan';
+  font-family: Masterplan;
   font-style: normal;
-  font-weight: normal;
-  src: url('/fonts/billy-argel_masterplan/MASTERPLAN___.ttf') format('truetype'),
-       url('/fonts/billy-argel_masterplan/MASTERPLAN___.woff') format('woff');
+  font-weight: 400;
+  src: url(fonts/billy-argel_masterplan/MASTERPLAN___.ttf) format("truetype"),url(fonts/billy-argel_masterplan/MASTERPLAN___.woff) format("woff");
 }
 
 * {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 body {
-    background-color: #EDDFF5;
-    font-size: 16px;
-    max-width: 1024px;
-    margin: 0 auto;
+  background-color: #eddff5;
+  font-size: 16px;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 fieldset {
-    border: none;
-    padding: 0;
+  border: none;
+  padding: 0;
 }
 
 fieldset legend {
-    display: block;
+  display: block;
 }
 
 a.appearance_button, #stamp_sizes label, label[for=background_image] {
-    display: inline-block;
-    padding: .5rem 1rem;
-    text-align: center;
-    color: #fff;
-    background-color: #000;
-    border-radius: .2rem;
-    text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.4rem;
+  display: inline-block;
+  padding: .5rem 1rem;
+  text-align: center;
+  color: #fff;
+  background-color: #000;
+  border-radius: .2rem;
+  text-decoration: none;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 1.4rem;
 }
 
 input[type=file] {
-    display: none;
+  display: none;
 }
 
-#stamp_sizes input:checked + label {
-    background-color: #88aa88;
+#stamp_sizes input:checked+label {
+  background-color: #8a8;
 }
 
-body > * {
-    width: 90%;
-    margin: 0 auto;
+body>* {
+  width: 90%;
+  margin: 0 auto;
 }
 
 header, canvas, a.appearance_button, p {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 a.appearance_button {
-    text-transform: uppercase;
-    font-weight: bold;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 canvas {
-    width: 100%;
+  width: 100%;
 }
 
 header {
-    margin: 0 auto;
-    text-align: center;
+  margin: 0 auto;
+  text-align: center;
 }
 
 h1 {
-    font-family: Masterplan;
-    color: red;
-    font-size: 6rem;
-    margin-bottom: 1rem;
+  font-family: Masterplan;
+  color: red;
+  font-size: 6rem;
+  margin-bottom: 1rem;
 }
 
 h2, legend, label {
-    color: #000;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
-    font-weight: bold;
+  color: #000;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-family: Arial,Helvetica,sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 h2 {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 header h2 {
-    font-size: 1rem;
-    padding: 0;
+  font-size: 1rem;
+  padding: 0;
 }
 
-#coda > * {
-    margin: 0;
-    padding-left: 1rem;
-    vertical-align: top;
-    width: 29%;
-    display: inline-block;
+#coda>* {
+  margin: 0;
+  padding-left: 1rem;
+  vertical-align: top;
+  width: 29%;
+  display: inline-block;
 }
 
-#coda > *:first-child {
-    padding-left: 0;
+#coda>*:first-child {
+  padding-left: 0;
 }
 
 #coda p {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 #coda img {
-    margin-bottom: 1rem;
-}
-
-#coda img {
-    max-width: 100%;
+  margin-bottom: 1rem;
+  max-width: 100%;
 }
 
 #stamp_sizes input {
-    display: none;
+  display: none;
 }
 
 label, legend {
-    color: #000;
-    margin-bottom: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.4rem;   
-    display: block;
-    padding: 0;
+  color: #000;
+  margin-bottom: 1rem;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 1.4rem;
+  display: block;
+  padding: 0;
 }
 
 input[type=text] {
-    margin-bottom: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.4rem;
-    width: 100%;
-    padding: .1rem;
+  margin-bottom: 1rem;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 1.4rem;
+  width: 100%;
+  padding: .1rem;
 }
 
 #controls {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
-#controls > div {
-    width: 49%;
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    vertical-align: top;
+#controls>div {
+  width: 49%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: top;
 }
 
-#controls > div > * {
-    text-align: right;
-    margin-bottom: 1.2rem;
+#controls>div>* {
+  text-align: right;
+  margin-bottom: 1.2rem;
 }
 
-#controls > div:first-child > * {
-    text-align: left;
-    margin-bottom: 1rem;
+#controls>div:first-child>* {
+  text-align: left;
+  margin-bottom: 1rem;
 }
