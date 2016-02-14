@@ -1,15 +1,22 @@
 @font-face {
   font-family: Masterplan;
   font-style: normal;
-  font-weight: 400;
-  src: url(fonts/billy-argel_masterplan/MASTERPLAN___.woff) format("woff"),url(fonts/billy-argel_masterplan/MASTERPLAN___.ttf) format("truetype");
+  font-weight: bold;
+  src: url(fonts//MASTERPLAN___.woff) format("woff"),url(fonts/billy-argel_masterplan/MASTERPLAN___.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "Capture It";
     font-style: normal;
     font-weight: 400;
-    src: url(fonts/capture_it/capture\ it.ttf) format("truetype");
+    src: url(fonts/capture\ it.woff) format("woff"),url(fonts/capture_it/capture\ it.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "D Day Stencil";
+    font-style: normal;
+    font-weight: 400;
+    src: url(fonts/D\ Day\ Stencil.woff) format('woff'),url(fonts/d_day_stencil/D\ Day\ Stencil.ttf) format('truetype');
 }
 
 * {
@@ -77,7 +84,7 @@ header {
 }
 
 h1 {
-  font-family: "Capture It";
+  font-family: "Masterplan",Arial,Helvetica,sans-serif;
   color: red;
   font-size: 6rem;
   margin-bottom: 1rem;

@@ -4,6 +4,9 @@ window.StamperUtil = (function() {
 
   module.load_image = function(image, callback) {
     var loader = document.createElement('img');
+    loader.style.display = 'none';
+    loader.height = 1;
+    loader.width = 1;
     loader.onload = function() {
       callback.apply(this, [loader]);
     }

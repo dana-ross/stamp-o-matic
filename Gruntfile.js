@@ -5,8 +5,8 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     ttf2woff: {
       default: {
-        src: ['fonts/billy-argel_masterplan/MASTERPLAN___.ttf'],
-        dest: 'fonts/billy-argel_masterplan/'
+        src: ['fonts/billy-argel_masterplan/MASTERPLAN___.ttf', 'fonts/capture_it/capture it.ttf', 'fonts/d_day_stencil/D Day Stencil.ttf'],
+        dest: 'fonts/'
       }
     }
   });

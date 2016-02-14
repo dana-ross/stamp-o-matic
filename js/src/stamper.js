@@ -1,7 +1,12 @@
 (function() {
 
-  var font_height_px = 72;
-  var stamp_text = 'test';
+  var font_height_px = {
+      'Capture It': 46,
+      'Masterplan': 72,
+      'D Day Stencil': 72
+  };
+  var stamp_text = 'Your Text';
+  var stamp_font = 'Masterplan';
   var rectangle_padding_px = 10;
   var rectangle_line_width = 3;
   var canvas = document.getElementById('preview');
@@ -41,12 +46,12 @@
       temp_ctx = temp_canvas.getContext('2d');
 
       temp_ctx.textAlign = 'top left';
-      temp_ctx.font = 'normal normal ' + font_height_px + 'px' + ' ' + 'Masterplan';
+      temp_ctx.font = 'normal normal ' + font_height_px + 'px' + ' "' + stamp_font + '"';
       text_width = temp_ctx.measureText(text);
 
       temp_canvas.width = text_width.width + (rectangle_padding_px * 2) + (rectangle_line_width * 2);
       temp_canvas.height = font_height_px + (rectangle_padding_px * 2) + (rectangle_line_width * 2);
-      temp_ctx.font = 'normal normal ' + font_height_px + 'px' + ' ' + 'Masterplan';
+      temp_ctx.font = 'normal normal ' + font_height_px + 'px' + ' "' + stamp_font + '"';
       temp_ctx.fillStyle = '#ca2541';
 
       temp_ctx.textBaseline = 'middle';
@@ -102,23 +107,28 @@
     }
     
     StamperUtil.clear_canvas(canvas);
-    var image = new Image;
-    image.onload = function(e) {
-        var scalingFactor = aspectRatioCorrection(true, image, canvas);
-        ctx.drawImage(image, 0, 0, image.width * scalingFactor, image.height * scalingFactor);
-        apply_stamp(ctx, font_height_px, stamp_text);
-    };
-    image.src = background_image_contents ? background_image_contents : single_transparent_pixel;
+    if(background_image_contents) {
+        var image = new Image;
+        image.src = background_image_contents;
+        image.onload = function(e) {
+            var scalingFactor = aspectRatioCorrection(true, image, canvas);
+            ctx.drawImage(image, 0, 0, image.width * scalingFactor, image.height * scalingFactor);
+            apply_stamp(ctx, font_height_px, stamp_text);
+        };
+    }
+    else {
+        apply_stamp(ctx, font_height_px, stamp_text);     
+    }
   }
   
   function getStampScalingFactor() {
     return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1    
   }
   
-  var fontLoader = new FontLoader(['Masterplan'], {
+  var fontLoader = new FontLoader([stamp_font], {
     'complete': function(error) {
       canvas.addEventListener('draw', function() {
-          render_canvas(canvas, ctx, font_height_px * getStampScalingFactor(), document.getElementById('stamp_text').value)
+          render_canvas(canvas, ctx, font_height_px[stamp_font] * getStampScalingFactor(), document.getElementById('stamp_text').value)
       });
       canvas.dispatchEvent(new Event('draw'));
     }
