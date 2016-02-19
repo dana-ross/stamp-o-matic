@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "FontLoader": "git://github.com/smnh/FontLoader",
+    "blueimp-load-image": "blueimp/JavaScript-Load-Image",
     "downloadjs": "rndme/download"
   }
 }
