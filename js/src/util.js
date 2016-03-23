@@ -2,7 +2,13 @@ window.StamperUtil = (function() {
 
   var module = {};
 
-  module.load_image = function(image, callback) {
+  /**
+   * Load an image into an <img> tag and call a callback when it's loaded
+   * @param object document window.document
+   * @param string image
+   * @param function callback
+   */
+  module.load_image = function(document, image, callback) {
     var loader = document.createElement('img');
     loader.style.display = 'none';
     loader.height = 1;
@@ -13,6 +19,10 @@ window.StamperUtil = (function() {
     loader.src = image;
   };
 
+  /**
+   * Clear a canvas by painting a white rectangle over it
+   * @param canvas canvas
+   */
   module.clear_canvas = function(canvas) {
     var ctx = canvas.getContext('2d');
     // Clear the canvas

@@ -36,7 +36,7 @@
 
   function draw_stamp(text, font_height_px, callback) {
 
-    StamperUtil.load_image('texture.png', function(loader) {
+    StamperUtil.load_image(document, 'texture.png', function(loader) {
 
       var text_width, temp_canvas, temp_ctx;
 
