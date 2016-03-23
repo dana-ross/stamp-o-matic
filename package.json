@@ -5,6 +5,7 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
+    "grunt": "~0.4.1",
     "grunt-ttf2woff": "^1.0.0"
   },
   "dependencies": {
