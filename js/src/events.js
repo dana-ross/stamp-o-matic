@@ -18,6 +18,10 @@
       input.addEventListener('change', function(e) {
         canvas.dispatchEvent(new Event('draw')); 
       });
-  };    
+  };
+  
+  document.getElementById('download_button').addEventListener('click', function() {
+     download(canvas.toDataURL('image/png'), 'stamp.png', 'image/png'); 
+  });    
     
 }());

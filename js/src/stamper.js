@@ -119,10 +119,6 @@
   }
   
   document.getElementById('background_image').addEventListener('change', readSingleFile, false);
-
-  document.getElementById('download_button').addEventListener('click', function() {
-     download(canvas.toDataURL('image/png'), 'stamp.png', 'image/png'); 
-  });
   
   var inputs = document.querySelectorAll( 'input[type=file]' );
     Array.prototype.forEach.call( inputs, function( input ) {
