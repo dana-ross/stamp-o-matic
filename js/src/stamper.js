@@ -13,7 +13,6 @@
   var ctx = canvas.getContext('2d');
   var angle = -10.14;
   var background_image_contents = '';
-  var single_transparent_pixel = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
   
   function apply_stamp(ctx, font_height_px, text) {
 
