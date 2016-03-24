@@ -35,7 +35,7 @@
 
   function draw_stamp(text, font_height_px, callback) {
 
-    StamperUtil.loadImage(document, 'texture.png', function(loader) {
+    StamperPure.loadImage(document, 'texture.png', function(loader) {
 
       var text_width, temp_canvas, temp_ctx;
 
@@ -78,12 +78,12 @@
 
   function render_canvas(canvas, ctx, font_height_px, stamp_text) {
     
-    StamperUtil.clearCanvas(canvas);
+    StamperPure.clearCanvas(canvas);
     if(background_image_contents) {
         var image = new Image;
         image.src = background_image_contents;
         image.onload = function(e) {
-            var scalingFactor = StamperUtil.aspectRatioCorrection(true, image, canvas);
+            var scalingFactor = StamperPure.aspectRatioCorrection(true, image, canvas);
             ctx.drawImage(image, 0, 0, image.width * scalingFactor, image.height * scalingFactor);
             apply_stamp(ctx, font_height_px, stamp_text);
         };
@@ -97,7 +97,7 @@
   var fontLoader = new FontLoader([stamp_font], {
     'complete': function(error) {
       canvas.addEventListener('draw', function() {
-          render_canvas(canvas, ctx, font_height_px[stamp_font] * StamperUtil.getStampScalingFactor(document), document.getElementById('stamp_text').value)
+          render_canvas(canvas, ctx, font_height_px[stamp_font] * StamperPure.getStampScalingFactor(document), document.getElementById('stamp_text').value)
       });
       canvas.dispatchEvent(new Event('draw'));
     }

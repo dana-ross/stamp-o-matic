@@ -1,4 +1,4 @@
-window.StamperUtil = (function() {
+window.StamperPure = (function() {
 
     var module = {};
 
