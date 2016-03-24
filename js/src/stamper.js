@@ -15,6 +15,15 @@
   var background_image_contents = '';
   var single_transparent_pixel = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
+  /**
+   * Get the selected scaling factor from the DOM or default to 1
+   * @param object document window.document
+   * @return integer
+   */
+  function getStampScalingFactor(document) {
+    return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1    
+  }
+  
   function apply_stamp(ctx, font_height_px, text) {
 
     draw_stamp(text, font_height_px, function(temp_canvas) {
@@ -121,14 +130,10 @@
     }
   }
   
-  function getStampScalingFactor() {
-    return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1    
-  }
-  
   var fontLoader = new FontLoader([stamp_font], {
     'complete': function(error) {
       canvas.addEventListener('draw', function() {
-          render_canvas(canvas, ctx, font_height_px[stamp_font] * getStampScalingFactor(), document.getElementById('stamp_text').value)
+          render_canvas(canvas, ctx, font_height_px[stamp_font] * getStampScalingFactor(document), document.getElementById('stamp_text').value)
       });
       canvas.dispatchEvent(new Event('draw'));
     }
