@@ -84,6 +84,31 @@ window.StamperPure = (function() {
         return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1
     }
 
+    /**
+     * Draw the rectangular border
+     * @param object canvas <canvas> element
+     * @param integer lineWidth line width in px
+     * @param integer padding box padding in px
+     * @param object img <img> tag to use as a pattern
+     * @return <canvas> object
+     */
+    module.drawRectangleBorder = function(canvas, lineWidth, padding, img) {
+        var ctx = canvas.getContext('2d');
+        ctx.lineWidth = lineWidth;
+        if (img) {
+            ctx.strokeStyle = ctx.createPattern(img, 'repeat');
+        }
+
+        ctx.strokeRect(
+            Math.round(padding / 2),
+            Math.round(padding / 2),
+            canvas.width - padding,
+            canvas.height - padding
+        );
+
+        return canvas;
+    }
+
     return module;
 
 } ());

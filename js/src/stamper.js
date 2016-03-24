@@ -59,17 +59,8 @@
         Math.round((rectangle_padding_px * 2) - (rectangle_line_width)) - 1,
         Math.round(font_height_px / 2 + rectangle_padding_px + rectangle_line_width)
       );
-
-      // Draw the rectangular border
-      temp_ctx.lineWidth = rectangle_line_width;
-      temp_ctx.strokeStyle = temp_ctx.createPattern(loader, 'repeat');
-
-      temp_ctx.strokeRect(
-        Math.round(rectangle_padding_px / 2),
-        Math.round(rectangle_padding_px / 2),
-        temp_canvas.width - rectangle_padding_px,
-        temp_canvas.height - rectangle_padding_px
-      );
+      
+      StamperPure.drawRectangleBorder(temp_canvas, rectangle_line_width, rectangle_padding_px, loader);
 
       callback.apply(this, [temp_canvas]);
 
