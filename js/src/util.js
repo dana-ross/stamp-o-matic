@@ -1,35 +1,99 @@
 window.StamperUtil = (function() {
 
-  var module = {};
+    var module = {};
 
-  /**
-   * Load an image into an <img> tag and call a callback when it's loaded
-   * @param object document window.document
-   * @param string image
-   * @param function callback
-   */
-  module.load_image = function(document, image, callback) {
-    var loader = document.createElement('img');
-    loader.style.display = 'none';
-    loader.height = 1;
-    loader.width = 1;
-    loader.onload = function() {
-      callback.apply(this, [loader]);
+    /**
+     * Load an image into an <img> tag and call a callback when it's loaded
+     * @param object document window.document
+     * @param string image
+     * @param function callback
+     */
+    module.load_image = function(document, image, callback) {
+        var loader = document.createElement('img');
+        loader.style.display = 'none';
+        loader.height = 1;
+        loader.width = 1;
+        loader.onload = function() {
+            callback.apply(this, [loader]);
+        }
+        loader.src = image;
+    };
+
+    /**
+     * Load an image into an <img> tag and call a callback when it's loaded
+     * @param object document window.document
+     * @param string font_url
+     * @param function callback
+     */
+    module.load_font = function(document, font_url, callback) {
+        var loader = document.createElement('img');
+        loader.style.display = 'none';
+        loader.height = 1;
+        loader.width = 1;
+        loader.onload = function() {
+            callback.apply(this, [loader]);
+        }
+        loader.src = image;
+    };
+
+    /**
+     * Clear a canvas by painting a white rectangle over it
+     * @param canvas canvas
+     */
+    module.clear_canvas = function(canvas) {
+        var ctx = canvas.getContext('2d');
+        // Clear the canvas
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
+
+    /**
+     * Calculate the scaling factor that needs to be applied to an image in order to fit it in a canvas.
+     * 
+     * @param bool preferFullWidth Fit to width with possible "space" above & below. If false, fits with space on left & right.
+     * @param object image <img> tag
+     * @param object canvas <canvas> tag
+     * @return float scaling factor to apply to the image in order to fit it in the given canvas 
+     */
+    module.aspectRatioCorrection = function(preferFullWidth, image, canvas) {
+
+        var scalingFactor;
+
+        var canvasWidth = canvas.width;
+        var canvasHeight = canvas.height;
+        var screenAspectRatio = canvasWidth / canvasHeight;
+
+        var imageWidth = image.width;
+        var imageHeight = image.height;
+        var imageAspectRatio = imageWidth / imageHeight;
+
+        if (preferFullWidth) {
+            if (screenAspectRatio > imageAspectRatio) {
+                scalingFactor = canvasWidth / imageWidth;
+            } else {
+                scalingFactor = canvasHeight / imageHeight;
+            }
+        } else {
+            if (screenAspectRatio > imageAspectRatio) {
+                scalingFactor = canvasHeight / imageHeight;
+            } else {
+                scalingFactor = canvasWidth / imageWidth;
+            }
+        }
+
+        return scalingFactor;
+
     }
-    loader.src = image;
-  };
 
-  /**
-   * Clear a canvas by painting a white rectangle over it
-   * @param canvas canvas
-   */
-  module.clear_canvas = function(canvas) {
-    var ctx = canvas.getContext('2d');
-    // Clear the canvas
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  };
-  
-  return module;
+    /**
+     * Get the selected scaling factor from the DOM or default to 1
+     * @param object document window.document
+     * @return integer
+     */
+    module.getStampScalingFactor = function(document) {
+        return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1
+    }
 
-}());
+    return module;
+
+} ());

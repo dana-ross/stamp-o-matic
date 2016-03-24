@@ -14,15 +14,6 @@
   var angle = -10.14;
   var background_image_contents = '';
   var single_transparent_pixel = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-
-  /**
-   * Get the selected scaling factor from the DOM or default to 1
-   * @param object document window.document
-   * @return integer
-   */
-  function getStampScalingFactor(document) {
-    return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1    
-  }
   
   function apply_stamp(ctx, font_height_px, text) {
 
@@ -88,39 +79,12 @@
 
   function render_canvas(canvas, ctx, font_height_px, stamp_text) {
     
-    function aspectRatioCorrection(fillScreen, image, canvas) {
-        var scalingFactor;
-
-        var screenWidth = canvas.width;
-        var screenHeight = canvas.height;
-        var screenAspectRatio = screenWidth / screenHeight;
-        var imageWidth = image.width;
-        var imageHeight = image.height;
-        var imageAspectRatio = imageWidth / imageHeight;
-
-        if (fillScreen) {
-            if (screenAspectRatio > imageAspectRatio) {
-                scalingFactor = screenWidth / imageWidth;
-            } else {
-                scalingFactor = screenHeight / imageHeight;
-            }
-        } else {
-            if (screenAspectRatio > imageAspectRatio) {
-                scalingFactor =  screenHeight / imageHeight;
-            } else {
-                scalingFactor = screenWidth / imageWidth;
-            }
-        }
-
-        return scalingFactor;
-    }
-    
     StamperUtil.clear_canvas(canvas);
     if(background_image_contents) {
         var image = new Image;
         image.src = background_image_contents;
         image.onload = function(e) {
-            var scalingFactor = aspectRatioCorrection(true, image, canvas);
+            var scalingFactor = StamperUtil.aspectRatioCorrection(true, image, canvas);
             ctx.drawImage(image, 0, 0, image.width * scalingFactor, image.height * scalingFactor);
             apply_stamp(ctx, font_height_px, stamp_text);
         };
@@ -128,12 +92,13 @@
     else {
         apply_stamp(ctx, font_height_px, stamp_text);     
     }
+    
   }
   
   var fontLoader = new FontLoader([stamp_font], {
     'complete': function(error) {
       canvas.addEventListener('draw', function() {
-          render_canvas(canvas, ctx, font_height_px[stamp_font] * getStampScalingFactor(document), document.getElementById('stamp_text').value)
+          render_canvas(canvas, ctx, font_height_px[stamp_font] * StamperUtil.getStampScalingFactor(document), document.getElementById('stamp_text').value)
       });
       canvas.dispatchEvent(new Event('draw'));
     }
