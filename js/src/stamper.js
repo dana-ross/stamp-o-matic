@@ -36,7 +36,7 @@
 
   function draw_stamp(text, font_height_px, callback) {
 
-    StamperUtil.load_image(document, 'texture.png', function(loader) {
+    StamperUtil.loadImage(document, 'texture.png', function(loader) {
 
       var text_width, temp_canvas, temp_ctx;
 
@@ -79,7 +79,7 @@
 
   function render_canvas(canvas, ctx, font_height_px, stamp_text) {
     
-    StamperUtil.clear_canvas(canvas);
+    StamperUtil.clearCanvas(canvas);
     if(background_image_contents) {
         var image = new Image;
         image.src = background_image_contents;
