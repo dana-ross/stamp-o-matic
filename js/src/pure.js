@@ -5,11 +5,13 @@ window.StamperPure = (function() {
     /**
      * Load an image into an <img> tag and call a callback when it's loaded
      * @param object document window.document
-     * @param string image
+     * @param string image url
      * @param function callback
+     * @return object image tag used to load the image
      */
     module.loadImage = function(document, image, callback) {
         var loader = document.createElement('img');
+
         loader.style.display = 'none';
         loader.height = 1;
         loader.width = 1;
@@ -17,17 +19,22 @@ window.StamperPure = (function() {
             callback.apply(this, [loader]);
         }
         loader.src = image;
+
+        return loader;
     };
 
     /**
      * Clear a canvas by painting a white rectangle over it
      * @param canvas canvas
+     * @return canvas
      */
     module.clearCanvas = function(canvas) {
         var ctx = canvas.getContext('2d');
+
         // Clear the canvas
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        return canvas;
     };
 
     /**
