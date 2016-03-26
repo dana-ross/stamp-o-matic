@@ -1,114 +1,106 @@
-window.StamperPure = (function() {
+/**
+ * Load an image into an <img> tag and call a callback when it's loaded
+ * @param object document window.document
+ * @param string image url
+ * @param function callback
+ * @return object image tag used to load the image
+ */
+exports.loadImage = function(document, image, callback) {
+    var loader = document.createElement('img');
 
-    var module = {};
+    loader.style.display = 'none';
+    loader.height = 1;
+    loader.width = 1;
+    loader.onload = function() {
+        callback.apply(this, [loader]);
+    }
+    loader.src = image;
 
-    /**
-     * Load an image into an <img> tag and call a callback when it's loaded
-     * @param object document window.document
-     * @param string image url
-     * @param function callback
-     * @return object image tag used to load the image
-     */
-    module.loadImage = function(document, image, callback) {
-        var loader = document.createElement('img');
+    return loader;
+};
 
-        loader.style.display = 'none';
-        loader.height = 1;
-        loader.width = 1;
-        loader.onload = function() {
-            callback.apply(this, [loader]);
-        }
-        loader.src = image;
+/**
+ * Clear a canvas by painting a white rectangle over it
+ * @param canvas canvas
+ * @return canvas
+ */
+exports.clearCanvas = function(canvas) {
+    var ctx = canvas.getContext('2d');
 
-        return loader;
-    };
+    // Clear the canvas
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    return canvas;
+};
 
-    /**
-     * Clear a canvas by painting a white rectangle over it
-     * @param canvas canvas
-     * @return canvas
-     */
-    module.clearCanvas = function(canvas) {
-        var ctx = canvas.getContext('2d');
+/**
+ * Calculate the scaling factor that needs to be applied to an image in order to fit it in a canvas.
+ * 
+ * @param bool preferFullWidth Fit to width with possible "space" above & below. If false, fits with space on left & right.
+ * @param object image <img> tag
+ * @param object canvas <canvas> tag
+ * @return float scaling factor to apply to the image in order to fit it in the given canvas 
+ */
+exports.aspectRatioCorrection = function(preferFullWidth, image, canvas) {
 
-        // Clear the canvas
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        return canvas;
-    };
+    var scalingFactor;
 
-    /**
-     * Calculate the scaling factor that needs to be applied to an image in order to fit it in a canvas.
-     * 
-     * @param bool preferFullWidth Fit to width with possible "space" above & below. If false, fits with space on left & right.
-     * @param object image <img> tag
-     * @param object canvas <canvas> tag
-     * @return float scaling factor to apply to the image in order to fit it in the given canvas 
-     */
-    module.aspectRatioCorrection = function(preferFullWidth, image, canvas) {
+    var canvasWidth = canvas.width;
+    var canvasHeight = canvas.height;
+    var screenAspectRatio = canvasWidth / canvasHeight;
 
-        var scalingFactor;
+    var imageWidth = image.width;
+    var imageHeight = image.height;
+    var imageAspectRatio = imageWidth / imageHeight;
 
-        var canvasWidth = canvas.width;
-        var canvasHeight = canvas.height;
-        var screenAspectRatio = canvasWidth / canvasHeight;
-
-        var imageWidth = image.width;
-        var imageHeight = image.height;
-        var imageAspectRatio = imageWidth / imageHeight;
-
-        if (preferFullWidth) {
-            if (screenAspectRatio > imageAspectRatio) {
-                scalingFactor = canvasWidth / imageWidth;
-            } else {
-                scalingFactor = canvasHeight / imageHeight;
-            }
+    if (preferFullWidth) {
+        if (screenAspectRatio > imageAspectRatio) {
+            scalingFactor = canvasWidth / imageWidth;
         } else {
-            if (screenAspectRatio > imageAspectRatio) {
-                scalingFactor = canvasHeight / imageHeight;
-            } else {
-                scalingFactor = canvasWidth / imageWidth;
-            }
+            scalingFactor = canvasHeight / imageHeight;
         }
-
-        return scalingFactor;
-
-    }
-
-    /**
-     * Get the selected scaling factor from the DOM or default to 1
-     * @param object document window.document
-     * @return integer
-     */
-    module.getStampScalingFactor = function(document) {
-        return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1
-    }
-
-    /**
-     * Draw the rectangular border
-     * @param object canvas <canvas> element
-     * @param integer lineWidth line width in px
-     * @param integer padding box padding in px
-     * @param object img <img> tag to use as a pattern
-     * @return <canvas> object
-     */
-    module.drawRectangleBorder = function(canvas, lineWidth, padding, img) {
-        var ctx = canvas.getContext('2d');
-        ctx.lineWidth = lineWidth;
-        if (img) {
-            ctx.strokeStyle = ctx.createPattern(img, 'repeat');
+    } else {
+        if (screenAspectRatio > imageAspectRatio) {
+            scalingFactor = canvasHeight / imageHeight;
+        } else {
+            scalingFactor = canvasWidth / imageWidth;
         }
-
-        ctx.strokeRect(
-            Math.round(padding / 2),
-            Math.round(padding / 2),
-            canvas.width - padding,
-            canvas.height - padding
-        );
-
-        return canvas;
     }
 
-    return module;
+    return scalingFactor;
 
-} ());
+}
+
+/**
+ * Get the selected scaling factor from the DOM or default to 1
+ * @param object document window.document
+ * @return integer
+ */
+exports.getStampScalingFactor = function(document) {
+    return parseInt(document.querySelectorAll('[name=stamp_size]:checked') && document.querySelectorAll('[name=stamp_size]:checked')[0].value) || 1
+}
+
+/**
+ * Draw the rectangular border
+ * @param object canvas <canvas> element
+ * @param integer lineWidth line width in px
+ * @param integer padding box padding in px
+ * @param object img <img> tag to use as a pattern
+ * @return <canvas> object
+ */
+exports.drawRectangleBorder = function(canvas, lineWidth, padding, img) {
+    var ctx = canvas.getContext('2d');
+    ctx.lineWidth = lineWidth;
+    if (img) {
+        ctx.strokeStyle = ctx.createPattern(img, 'repeat');
+    }
+
+    ctx.strokeRect(
+        Math.round(padding / 2),
+        Math.round(padding / 2),
+        canvas.width - padding,
+        canvas.height - padding
+    );
+
+    return canvas;
+}
