@@ -10,14 +10,14 @@
   var rectangle_padding_px = 10;
   var rectangle_line_width = 3;
   var canvas = document.getElementById('preview');
-  var ctx = canvas.getContext('2d');
   var angle = -10.14;
   var background_image_contents = '';
   
-  function apply_stamp(ctx, font_height_px, text) {
-
-    draw_stamp(text, font_height_px, function(temp_canvas) {
-
+  function apply_stamp(canvas, font_height_px, text) {
+    
+    draw_stamp(text, font_height_px, function(stamp_canvas) {
+        
+      var ctx = canvas.getContext('2d');
       ctx.save();
 
       ctx.translate(
@@ -26,9 +26,9 @@
       )
       ctx.rotate((angle < 0 ? 360 - Math.abs(angle) : angle) * 0.017);
 
-      ctx.drawImage(temp_canvas, Math.round(temp_canvas.width / -2), Math.round(temp_canvas.height / -2));
+      ctx.drawImage(stamp_canvas, Math.round(stamp_canvas.width / -2), Math.round(stamp_canvas.height / -2));
       ctx.restore();
-
+      
     });
 
   }
@@ -37,12 +37,12 @@
 
     StamperPure.loadImage(document, 'texture.png', function(loader) {
 
-      var text_width, temp_canvas, temp_ctx;
+      var text_width,
+      temp_canvas = document.createElement('canvas'),
+      temp_ctx = temp_canvas.getContext('2d');
 
-      temp_canvas = document.createElement('canvas');
       temp_canvas.width = '9999';
       temp_canvas.height = '9999';
-      temp_ctx = temp_canvas.getContext('2d');
 
       temp_ctx.textAlign = 'top left';
       temp_ctx.font = 'normal normal ' + font_height_px + 'px' + ' "' + stamp_font + '"';
@@ -67,28 +67,25 @@
     });
   }
 
-  function render_canvas(canvas, ctx, font_height_px, stamp_text) {
-    
+  function render_canvas(canvas, font_height_px, stamp_text) {
     StamperPure.clearCanvas(canvas);
     if(background_image_contents) {
         var image = new Image;
         image.src = background_image_contents;
         image.onload = function(e) {
+            var ctx = canvas.getContext('2d');
             var scalingFactor = StamperPure.aspectRatioCorrection(true, image, canvas);
             ctx.drawImage(image, 0, 0, image.width * scalingFactor, image.height * scalingFactor);
-            apply_stamp(ctx, font_height_px, stamp_text);
         };
     }
-    else {
-        apply_stamp(ctx, font_height_px, stamp_text);     
-    }
     
+    apply_stamp(canvas, font_height_px, stamp_text);    
   }
   
   var fontLoader = new FontLoader([stamp_font], {
     'complete': function(error) {
       canvas.addEventListener('draw', function() {
-          render_canvas(canvas, ctx, font_height_px[stamp_font] * StamperPure.getStampScalingFactor(document), document.getElementById('stamp_text').value)
+          render_canvas(canvas, font_height_px[stamp_font] * StamperPure.getStampScalingFactor(document), document.getElementById('stamp_text').value)
       });
       canvas.dispatchEvent(new Event('draw'));
     }
