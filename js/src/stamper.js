@@ -1,3 +1,8 @@
+var StamperPure = require('./pure.js');
+var Events = require('./events.js');
+var FontLoader = require('FontLoader/FontLoader.js');
+var Download = require('downloadjs/download.min.js');
+
 (function() {
 
   var font_height_px = {

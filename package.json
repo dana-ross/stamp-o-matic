@@ -6,7 +6,8 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-ttf2woff": "^1.0.0"
+    "grunt-ttf2woff": "^1.0.0",
+    "webpack": "^1.12.14"
   },
   "dependencies": {
     "FontLoader": "git://github.com/smnh/FontLoader",
