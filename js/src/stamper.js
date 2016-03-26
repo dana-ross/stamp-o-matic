@@ -1,7 +1,6 @@
 var StamperPure = require('./pure.js');
 var Events = require('./events.js');
-var FontLoader = require('FontLoader/FontLoader.js');
-var Download = require('downloadjs/download.min.js');
+var FontLoader = require('FontLoader');
 
 (function() {
 

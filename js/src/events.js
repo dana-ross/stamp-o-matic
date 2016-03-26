@@ -1,3 +1,5 @@
+var download = require('downloadjs');
+
 var canvas = document.getElementById('preview');
 var stamp_size_inputs = document.querySelectorAll('[name=stamp_size]');
 
